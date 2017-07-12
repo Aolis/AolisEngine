@@ -1,2 +1,2 @@
-# AolisEngine
-Planned engine for implementation in Trial of Aolis
+# Aolis Engine
+The planned engine for implementation in the Trial of Aolis game.
