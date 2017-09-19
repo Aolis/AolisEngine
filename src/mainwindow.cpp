@@ -75,6 +75,7 @@ void MainWindow::close(const char* msg) {
 		window = NULL;
 	}
 
+	IMG_Quit();
 	SDL_Quit();
 }
 
