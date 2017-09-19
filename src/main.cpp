@@ -1,36 +1,31 @@
 #include <cstdio>
 
-//#include "mainwindow.h"
-#include <SDL2/SDL.h>
+#include "functions.h"
+#include "log.h"
+#include "mainwindow.h"
 
 
 int main(int argc, char** argv) {
-	printf("Hello world!\n");
+	MainWindow* window = new MainWindow();
+	window->loadBackground("cave.png");
 
-	SDL_Window* window;
+	unsigned int index = 0;
+	while (window->isActive()) {
+		window->manageEvents();
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		printf("ERROR: Could not initialize SDL: %s\n", SDL_GetError());
+		index++;
+
+		const std::string msg = "Current iteration: ";
+		log(msg + toString(index));
+
+		/*
+		if (index > 9) {
+			window->close();
+		}
+		*/
+
+		SDL_Delay(win::refresh);
 	}
-
-	window = SDL_CreateWindow(
-		"Test SDL Application",
-		SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED,
-		640,
-		480,
-		SDL_WINDOW_OPENGL
-	);
-
-	if (window == NULL) {
-		printf("ERROR: Could not create window: %s\n", SDL_GetError());
-	}
-
-	SDL_Delay(3000);
-
-	SDL_DestroyWindow(window);
-
-	SDL_Quit();
 
 	return 0;
 }
