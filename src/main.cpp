@@ -7,7 +7,7 @@
 
 int main(int argc, char** argv) {
 	MainWindow* window = new MainWindow();
-	window->loadBackground("cave.png");
+	window->setBackground("cave.png");
 
 	unsigned int index = 0;
 	while (window->isActive()) {

@@ -80,7 +80,7 @@ void MainWindow::close(const char* msg) {
 }
 
 
-const bool MainWindow::loadBackground(const char* img) {
+const bool MainWindow::setBackground(const char* img) {
 	screen = IMG_Load(img);
 	if (screen == NULL) {
 		printf("ERROR: Could not load background image\n%s\n", SDL_GetError());

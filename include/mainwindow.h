@@ -20,7 +20,7 @@ public:
 	void manageEvents();
 	void close(const char* msg=NULL);
 	const bool isActive() {return (window != NULL);};
-	const bool loadBackground(const char* img);
+	const bool setBackground(const char* img);
 private:
 	SDL_Event events;
 	//SDL_Renderer* renderer;
