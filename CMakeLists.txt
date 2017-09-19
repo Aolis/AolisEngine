@@ -18,7 +18,7 @@ find_package (SDL2 REQUIRED)
 
 set (EXEC run)
 #set (Aolis_SOURCE_DIR src)
-set (SOURCE_FILES src/main.cpp src/functions.cpp)
+set (SOURCE_FILES src/main.cpp src/log.cpp src/functions.cpp)
 add_executable (${EXEC} ${SOURCE_FILES})
 target_include_directories (${EXEC} PUBLIC ${SDL2_INCLUDE_DIR} include)
 
