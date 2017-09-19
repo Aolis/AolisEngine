@@ -10,6 +10,7 @@ set (Aolis_VERSION_MINOR 1)
 set (Aolis_VERSION_PATCH 0)
 
 enable_language (CXX)
+add_compile_options(-std=c++11)
 
 #find_file (SDL2_INCLUDE_DIR NAME SDL.h HINTS SDL2)
 #find_library (SDL2_LIBRARY NAME SDL2)
