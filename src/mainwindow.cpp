@@ -4,7 +4,7 @@
 #include "mainwindow.h"
 
 MainWindow::MainWindow() {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) < 0) {
 		printf("ERROR: Could not initialize SDL\n");
 		close(SDL_GetError());
 		return;
@@ -34,6 +34,20 @@ MainWindow::MainWindow() {
 	int flags = IMG_INIT_PNG;
 	if ((IMG_Init(flags)&flags) != flags) {
 		printf("ERROR: Could not initialize PNG support\n");
+		close(SDL_GetError());
+		return;
+	}
+	// Initialize audio support
+	int aflags = MIX_INIT_OGG;
+	if ((Mix_Init(aflags)&aflags) != aflags) {
+		printf("ERROR: Could not initialize OGG support\n");
+		close(SDL_GetError());
+		return;
+	}
+
+	// Open audio device
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
+		printf("ERROR: Could not open audio device\n");
 		close(SDL_GetError());
 		return;
 	}
@@ -79,6 +93,12 @@ void MainWindow::close(const char* msg) {
 		window = NULL;
 	}
 
+	if (bgmusic != NULL) {
+		Mix_FreeMusic(bgmusic);
+		bgmusic = NULL;
+	}
+
+	Mix_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -93,6 +113,29 @@ const bool MainWindow::setBackground(const char* img) {
 
 	SDL_BlitSurface(screen, NULL, SDL_GetWindowSurface(window), NULL);
 	SDL_UpdateWindowSurface(window);
+
+	return true;
+}
+
+
+const bool MainWindow::setMusic(const char* ogg, const bool fade) {
+	bgmusic = Mix_LoadMUS(ogg);
+	if (!bgmusic) {
+		printf("ERROR: Could not load music\n%s\n", SDL_GetError());
+		return false;
+	}
+
+	int played;
+	if (fade) {
+		played = Mix_FadeInMusic(bgmusic, -1, 2000);
+	} else {
+		played = Mix_PlayMusic(bgmusic, -1);
+	}
+
+	if (played == -1) {
+		printf("ERROR: Could not play music\n%s\n", SDL_GetError());
+		return false;
+	}
 
 	return true;
 }

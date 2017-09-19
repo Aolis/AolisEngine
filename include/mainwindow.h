@@ -2,6 +2,7 @@
 #define AOLIS_MAINWINDOW_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 
 // Window default attributes
@@ -21,11 +22,13 @@ public:
 	void close(const char* msg=NULL);
 	const bool isActive() {return (window != NULL);};
 	const bool setBackground(const char* img);
+	const bool setMusic(const char* ogg, const bool fade=false);
 private:
 	SDL_Event events;
 	//SDL_Renderer* renderer;
 	SDL_Window* window;
 	SDL_Surface* screen;
+	Mix_Music* bgmusic;
 };
 
 

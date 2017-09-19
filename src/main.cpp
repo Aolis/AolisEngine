@@ -8,6 +8,7 @@
 int main(int argc, char** argv) {
 	MainWindow* window = new MainWindow();
 	window->setBackground("cave.png");
+	window->setMusic("title.ogg", true);
 
 	unsigned int index = 0;
 	while (window->isActive()) {
