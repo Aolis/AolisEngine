@@ -10,7 +10,7 @@ set (Aolis_VERSION_MINOR 1)
 set (Aolis_VERSION_PATCH 0)
 
 enable_language (CXX)
-add_compile_options(-std=c++11)
+add_compile_options(-std=c++11 -DDEBUG)
 
 include (FindPkgConfig)
 
