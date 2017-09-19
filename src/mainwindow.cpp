@@ -10,6 +10,10 @@ MainWindow::MainWindow() {
 		return;
 	}
 
+	// Hide cursor
+	// FIXME: Use setting?
+	SDL_ShowCursor(SDL_DISABLE);
+
 	window = SDL_CreateWindow(win::title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, win::width, win::height, SDL_WINDOW_OPENGL);
 	if (window == NULL) {
 		printf("ERROR: Could not create SDL window\n");
